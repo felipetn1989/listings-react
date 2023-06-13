@@ -17,7 +17,7 @@ export default function Listing() {
       });
       const data = await resp.json();
       setJobs(data);
-      setAllJobs(data);
+      setAllJobs(data); // this is my immutable variable, i need it so that the filter works when removing a specific filter; otherwise it will check an already mutated array and then it won't work
     } catch (err) {
       console.log(err);
     }
@@ -32,12 +32,12 @@ export default function Listing() {
 
     if (!filterTags.includes(filter)) {
       setFilterTags([...filterTags, e.target.innerText]);
-    }
+    } // to avoid the user from selecting the same filter tag multiple times
   }
 
   function clearAllFilters() {
-    setJobs(allJobs);
-    setFilterTags([]);
+    setJobs(allJobs); // setJobs changes the jobs variable, but allJobs remains the same
+    setFilterTags([]); // clearing all of the filters
   }
 
   function removeFilter(tagName) {
@@ -54,7 +54,7 @@ export default function Listing() {
         )
       ),
     [filterTags, allJobs]
-  );
+  ); // this will re-render the list; instead of writing this piece of code multiple times, it is written once and invoked whenever filterTags of allJobs are changed
 
   return (
     <main className="grid gap-10 pt-14 px-6 mb-8 bg-[#effafa] lg:gap-[0.3125rem]">

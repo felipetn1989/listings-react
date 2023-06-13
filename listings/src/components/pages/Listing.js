@@ -25,7 +25,7 @@ export default function Listing() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // to avoid an infinite loop
 
   function filterJobs(e) {
     const filter = e.target.innerText;
